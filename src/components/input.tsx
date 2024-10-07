@@ -1,9 +1,9 @@
 import styled from "styled-components"
 
-export default function Input ({value}: {value: string}) {
+export default function Input ({value}: { value: string }) {
     return (
         <InputContainer>
-          <input disabled value={value}/>
+           <input disabled value={value}/>
         </InputContainer>
       )
 }
