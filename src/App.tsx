@@ -2,71 +2,110 @@ import styled from "styled-components";
 import Header from "./components/header";
 import Input from "./components/input";
 import Button from "./components/button";
-import { useState } from "react";
+import { useState, ReactNode } from "react";
 
 export default function App() {
 
-  const [currentValue, setCurrentValue] = useState('')
-  const [previousValue, setPreviousValue] = useState('')
-  const [operator, setOperator] = useState('')
+  const [expression, setExpression] = useState<string[]>([])
+  const [error, setError] = useState<string>('')
 
-  const addValue = (number: string) =>{
-      setCurrentValue(prev => (prev === '' ? number: prev + number))
+  const addValue = (number: string) => {
+    setExpression(prev => {
+      if (prev.length === 0 || isOperator(prev[prev.length - 1])) {
+        return [...prev, number]
+      } else {
+        const newPrev = [...prev]
+        newPrev[newPrev.length - 1] += number
+        return newPrev
+      }
+    })
   }
-
-  const delValue = () => {
-      setCurrentValue(prev => (prev.length > 0 ? prev.slice(0, -1) : ''))
-  }
-
-  const resetValue = () => {
-    setCurrentValue('');
-    setPreviousValue('');
-    setOperator('');
-  }
-
+  
   const handleOperator = (op: string) => {
-    if (currentValue === '') return
-    setPreviousValue(currentValue + '' + op)
-    setCurrentValue('')
-    setOperator(op)
+    setExpression(prev => {
+      if (prev.length === 0) return prev
+      if (isOperator(prev[prev.length - 1])) {
+        const newPrev = [...prev]
+        newPrev[newPrev.length - 1] = op
+        return newPrev
+      }
+      return [...prev, op]
+    })
+  }
+  
+  const isOperator = (char: string) => ['+', '-', 'x', '/'].includes(char)
+  
+  const delValue = () => {
+    setExpression(prev => {
+      const newPrev = [...prev]
+      if (newPrev.length > 0) {
+        const lastItem = newPrev[newPrev.length - 1]
+        if (lastItem.length > 1) {
+          newPrev[newPrev.length - 1] = lastItem.slice(0, -1)
+        } else {
+          newPrev.pop()
+        }
+      }
+      return newPrev
+    })
+  }
+  
+  const resetValue = () => {
+    setExpression([])
+    setError('')
   }
   
   const calculate = () => {
-    if (previousValue === '' || currentValue === '') return
+
+    if (expression.length === 0) return
   
-    let result: number
-    const prev = parseFloat(previousValue)
-    const curr = parseFloat(currentValue)
+    try {
+      let result = parseFloat(expression[0])
 
-    switch (operator) {
-      case '+':
-        result = prev + curr
-      break
+      for (let i = 1; i < expression.length; i += 2) {
 
-      case '-':
-        result = prev - curr
-      break
+        const operator = expression[i]
+        const addNumber = parseFloat(expression[i + 1])
+        
+        switch (operator) {
 
-      case 'x':
-        result = prev * curr
-      break
+          case '+':
+            result += addNumber
+          break
 
-      case '/':
-        result = prev / curr
-      break
+          case '-':
+            result -= addNumber
+          break
 
-      default: return
+          case 'x':
+            result *= addNumber
+          break
+
+          case '/':
+            if (addNumber === 0) throw new Error('Erro: divisão por zero')
+            result /= addNumber
+          break
+
+          default:
+            throw new Error('Operador inválido')
+        }
+      }
+  
+      setExpression([result.toString()])
+    } catch (err) {
+    if (err instanceof Error) {
+        setError(err.message)
+      } else {
+        setError('Ocorreu um erro desconhecido')
+      }
     }
-
-    setCurrentValue(result.toString())
-    setPreviousValue('')
-    setOperator('')
   }
 
   return (
     <Container>
       <Header />
-      <Input value={previousValue + currentValue}/>
+      <Input value={expression.join('')}/>
+      {error && <ErrorMessage>{error}</ErrorMessage>}
 
       <Row>
         <Button label='7' onClick={() => addValue('7')} />
@@ -123,4 +162,10 @@ const Row = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
+`
+
+const ErrorMessage = styled.div<{ children: ReactNode }>`
+  color: red;
+  text-align: center;
+  margin-bottom: 10px;
 `
