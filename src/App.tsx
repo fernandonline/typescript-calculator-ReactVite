@@ -66,6 +66,7 @@ export default function App() {
 
         const operator = expression[i]
         const addNumber = parseFloat(expression[i + 1])
+
         
         switch (operator) {
 
