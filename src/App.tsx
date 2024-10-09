@@ -2,12 +2,12 @@ import styled from "styled-components";
 import Header from "./components/header";
 import Input from "./components/input";
 import Button from "./components/button";
-import { useState, ReactNode } from "react";
+import { useState } from "react";
+import { evaluate } from "mathjs";
 
 export default function App() {
 
   const [expression, setExpression] = useState<string[]>([])
-  const [error, setError] = useState<string>('')
 
   const addValue = (number: string) => {
     setExpression(prev => {
@@ -52,53 +52,17 @@ export default function App() {
   
   const resetValue = () => {
     setExpression([])
-    setError('')
   }
   
   const calculate = () => {
 
     if (expression.length === 0) return
-  
-    try {
-      let result = parseFloat(expression[0])
-
-      for (let i = 1; i < expression.length; i += 2) {
-
-        const operator = expression[i]
-        const addNumber = parseFloat(expression[i + 1])
-
-        
-        switch (operator) {
-
-          case '+':
-            result += addNumber
-          break
-
-          case '-':
-            result -= addNumber
-          break
-
-          case 'x':
-            result *= addNumber
-          break
-
-          case '/':
-            if (addNumber === 0) throw new Error('Erro: divisão por zero')
-            result /= addNumber
-          break
-
-          default:
-            throw new Error('Operador inválido')
-        }
-      }
-  
+    else
+    {
+ 
+      const expressionString = expression.join('').replace(/x/g, '*').replace(/,/g, '.')
+      const result = evaluate(expressionString)
       setExpression([result.toString()])
-    } catch (err) {
-    if (err instanceof Error) {
-        setError(err.message)
-      } else {
-        setError('Ocorreu um erro desconhecido')
-      }
     }
   }
 
@@ -106,7 +70,6 @@ export default function App() {
     <Container>
       <Header />
       <Input value={expression.join('')}/>
-      {error && <ErrorMessage>{error}</ErrorMessage>}
 
       <Row>
         <Button label='7' onClick={() => addValue('7')} />
@@ -130,8 +93,8 @@ export default function App() {
       </Row>
 
       <Row>
-        <Button label='.' onClick={() => addValue('.')} />
-        <Button label='0' onClick={() => addValue('0')} />
+        <Button label=',' onClick={() => addValue(',')}/>
+        <Button label='0' onClick={() => addValue('0')}/>
         <Button label='/' onClick={() => handleOperator('/')} />
         <Button label='X' onClick={() => handleOperator('x')} />
       </Row>
@@ -163,10 +126,4 @@ const Row = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
-`
-
-const ErrorMessage = styled.div<{ children: ReactNode }>`
-  color: red;
-  text-align: center;
-  margin-bottom: 10px;
 `
