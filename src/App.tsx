@@ -4,6 +4,7 @@ import Input from "./components/input";
 import Button from "./components/button";
 import { useState } from "react";
 import { evaluate } from "mathjs";
+import Footer from "./components/footer";
 
 export default function App() {
 
@@ -57,13 +58,11 @@ export default function App() {
   const calculate = () => {
 
     if (expression.length === 0) return
-    else
-    {
- 
+
       const expressionString = expression.join('').replace(/x/g, '*').replace(/,/g, '.')
       const result = evaluate(expressionString)
+
       setExpression([result.toString()])
-    }
   }
 
   return (
@@ -71,59 +70,65 @@ export default function App() {
       <Header />
       <Input value={expression.join('')}/>
 
-      <Row>
-        <Button label='7' onClick={() => addValue('7')} />
-        <Button label='8' onClick={() => addValue('8')} />
-        <Button label='9' onClick={() => addValue('9')} />
-        <Button label='DEL' onClick={delValue} />
-      </Row>
+      <ButtonScreen>
 
-      <Row>
-        <Button label='4' onClick={() => addValue('4')} />
-        <Button label='5' onClick={() => addValue('5')} />
-        <Button label='6' onClick={() => addValue('6')} />
-        <Button label='+' onClick={() => handleOperator('+')} />
-      </Row>
+        <Row>
+          <Button label='7' onClick={() => addValue('7')}/>
+          <Button label='8' onClick={() => addValue('8')}/>
+          <Button label='9' onClick={() => addValue('9')}/>
+          <Button label='DEL' onClick={delValue}/>
+        </Row>
 
-      <Row>
-        <Button label='1' onClick={() => addValue('1')} />
-        <Button label='2' onClick={() => addValue('2')} />
-        <Button label='3' onClick={() => addValue('3')} />
-        <Button label='-' onClick={() => handleOperator('-')} />
-      </Row>
+        <Row>
+          <Button label='4' onClick={() => addValue('4')}/>
+          <Button label='5' onClick={() => addValue('5')}/>
+          <Button label='6' onClick={() => addValue('6')}/>
+          <Button label='+' onClick={() => handleOperator('+')}/>
+        </Row>
 
-      <Row>
-        <Button label=',' onClick={() => addValue(',')}/>
-        <Button label='0' onClick={() => addValue('0')}/>
-        <Button label='/' onClick={() => handleOperator('/')} />
-        <Button label='X' onClick={() => handleOperator('x')} />
-      </Row>
+        <Row>
+          <Button label='1' onClick={() => addValue('1')}/>
+          <Button label='2' onClick={() => addValue('2')}/>
+          <Button label='3' onClick={() => addValue('3')}/>
+          <Button label='-' onClick={() => handleOperator('-')}/>
+        </Row>
 
-      <Row>
-        <Button label='RESET' onClick={resetValue} />
-        <Button label='=' onClick={calculate} />
-      </Row>
+        <Row>
+          <Button label=',' onClick={() => addValue(',')}/>
+          <Button label='0' onClick={() => addValue('0')}/>
+          <Button label='/' onClick={() => handleOperator('/')}/>
+          <Button label='X' onClick={() => handleOperator('x')}/>
+        </Row>
+
+        <Row>
+          <Button label='RESET' onClick={resetValue}/>
+          <Button label='=' onClick={calculate}/>
+        </Row>
+      </ButtonScreen>
+      <Footer/>
 
     </Container>
   )
 }
 
+const ButtonScreen = styled.div`
+  background-color: #000000;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  border-bottom-left-radius: 16px;
+  border-bottom-right-radius: 8px;
+`
+
 const Container = styled.div`
-  max-width: 500px;
-  min-width: 340px;
-  margin: 0 auto;
   user-select: none;
-  border: 2px solid white;
-
-  @media screen and (max-width: 450px) {
-    min-width: 300px;
-  }
-
+  padding: 5%;
+  background-color: #54afff;
+  border-radius: 16px;
 `
 
 const Row = styled.div`
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 `

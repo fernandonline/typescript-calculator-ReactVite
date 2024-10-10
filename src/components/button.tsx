@@ -12,12 +12,12 @@ export default function Button({ label, onClick }: { label: string; onClick: () 
 const ButtonStyled = styled.button`
     height: 10vh;
     width: 10vw;
-    border: 1px solid #CDCDCD;
-    background: var(--btn);
+    background-color: var(--btn);
     color: #FFF;
     font-size: 1.2rem;
     font-weight: 700;
     flex: 1;
+    border: none;
     &:hover{
         opacity: 0.6;
     }

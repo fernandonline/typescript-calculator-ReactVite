@@ -12,18 +12,19 @@ const InputContainer = styled.div`
     width: 100%;
     height: 12vh;
     background: var(--screen-background);
-
     display: flex;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: center;
     font-size: 2rem;
     font-family: 'Roboto';
+    border-top-right-radius: 26px;
+    border-top-left-radius: 26px;
 
     input {
         width: 100%;
         height: 100%;
         padding: 0 2rem;
-        background: var(--toggle-backgrouond);
+        background-color: var(--screen-backgrouond);
         border: 0;
         font-size: 2rem;
         font-family: 'Roboto';
