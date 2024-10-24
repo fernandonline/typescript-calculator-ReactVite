@@ -6,25 +6,27 @@ export default createGlobalStyle`
         margin: 0;
         padding: 0;
         box-sizing: border-box;
+        font-family: var(--fonte-padrao);
     }
 
     :root { 
-        --main-background: #FFF;
         --screen-background: #121A26;
-        --btn: #000;
-        --white: #fff;
         --white-text: #fff;
+        --bg-black: #000;
+        --fonte-padrao: "Carme", sans-serif;
     }
 
-    body{
-        min-width: 100vw;
-        min-height: 100vh;
-        background-color: var(--main-background);
-        color: var(--white-text);
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        font-family: 'Roboto', sans-serif;
-        padding: 2%;
+    body {
+    user-select: none;
+    background-color: var(--bg-black);
+    height: 100svh;
+    color: var(--white-text);
+    display: flex;
+    flex-direction: column;
+    font-family: var(--fonte-padrao);
+    font-weight: 400;
+    font-style: normal;
+    padding-left: 1.5svw;
+    padding-right: 1.5svw;
     }
 `

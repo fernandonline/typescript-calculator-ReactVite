@@ -66,7 +66,7 @@ export default function App() {
   }
 
   return (
-    <Container>
+    <>
       <Header />
       <Input value={expression.join('')}/>
 
@@ -106,28 +106,22 @@ export default function App() {
         </Row>
       </ButtonScreen>
       <Footer/>
-
-    </Container>
+    </>
   )
 }
 
 const ButtonScreen = styled.div`
-  background-color: #000000;
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-  border-bottom-left-radius: 16px;
-  border-bottom-right-radius: 8px;
-`
-
-const Container = styled.div`
-  user-select: none;
-  padding: 5%;
-  background-color: #54afff;
+  background-color: var(--bg-black);
   border-radius: 16px;
+  min-height: 68svh;
+  display: flex;
+  flex-direction: column;
+  gap: 1vh;
+  padding-top: 1.5svh;
+  padding-bottom: 1.5svh;
 `
 
 const Row = styled.div`
-  width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;

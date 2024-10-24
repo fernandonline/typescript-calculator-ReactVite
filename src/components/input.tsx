@@ -10,15 +10,14 @@ export default function Input ({value}: { value: string }) {
 
 const InputContainer = styled.div`
     width: 100%;
-    height: 12vh;
+    height: 14svh;
     background: var(--screen-background);
     display: flex;
-    align-items: center;
-    justify-content: center;
+
     font-size: 2rem;
-    font-family: 'Roboto';
-    border-top-right-radius: 26px;
-    border-top-left-radius: 26px;
+    font-family: var(--fonte-padrao);
+    border-radius: 16px;
+    margin-bottom: 5px;
 
     input {
         width: 100%;
@@ -27,7 +26,9 @@ const InputContainer = styled.div`
         background-color: var(--screen-backgrouond);
         border: 0;
         font-size: 2rem;
-        font-family: 'Roboto';
-        color: #fff;
+        font-family: var(--fonte-padrao);
+        color: var(--white-text);
+        display: flex;
+        text-align: end;
     }
 `
