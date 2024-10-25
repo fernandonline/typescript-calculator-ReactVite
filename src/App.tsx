@@ -71,39 +71,40 @@ export default function App() {
       <Input value={expression.join('')}/>
 
       <ButtonScreen>
+          
+        <Row>
+          <Button label='C' onClick={resetValue}/>
+          <Button label='⌫' onClick={delValue}/>
+        </Row>
 
         <Row>
           <Button label='7' onClick={() => addValue('7')}/>
           <Button label='8' onClick={() => addValue('8')}/>
           <Button label='9' onClick={() => addValue('9')}/>
-          <Button label='DEL' onClick={delValue}/>
+          <Button label='X' onClick={() => handleOperator('x')}/>
         </Row>
 
         <Row>
           <Button label='4' onClick={() => addValue('4')}/>
           <Button label='5' onClick={() => addValue('5')}/>
           <Button label='6' onClick={() => addValue('6')}/>
-          <Button label='+' onClick={() => handleOperator('+')}/>
+          <Button label='-' onClick={() => handleOperator('-')}/>
         </Row>
 
         <Row>
           <Button label='1' onClick={() => addValue('1')}/>
           <Button label='2' onClick={() => addValue('2')}/>
           <Button label='3' onClick={() => addValue('3')}/>
-          <Button label='-' onClick={() => handleOperator('-')}/>
+          <Button label='+' onClick={() => handleOperator('+')}/>
         </Row>
 
         <Row>
           <Button label=',' onClick={() => addValue(',')}/>
           <Button label='0' onClick={() => addValue('0')}/>
           <Button label='/' onClick={() => handleOperator('/')}/>
-          <Button label='X' onClick={() => handleOperator('x')}/>
-        </Row>
-
-        <Row>
-          <Button label='RESET' onClick={resetValue}/>
           <Button label='=' onClick={calculate}/>
         </Row>
+
       </ButtonScreen>
       <Footer/>
     </>
@@ -113,7 +114,7 @@ export default function App() {
 const ButtonScreen = styled.div`
   background-color: var(--bg-black);
   border-radius: 16px;
-  min-height: 68svh;
+  min-height: 55svh;
   display: flex;
   flex-direction: column;
   gap: 1vh;

@@ -17,7 +17,6 @@ export default createGlobalStyle`
     }
 
     body {
-    user-select: none;
     background-color: var(--bg-black);
     height: 100svh;
     color: var(--white-text);

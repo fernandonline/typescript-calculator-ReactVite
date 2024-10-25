@@ -10,7 +10,7 @@ export default function Footer ()
 }
 
 const Rodape = styled.footer`
-    min-height: 8vh;
+    min-height: 8svh;
     width: 100%;
     border: 1px solid white;
 

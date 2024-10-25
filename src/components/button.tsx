@@ -3,7 +3,7 @@ import styled from "styled-components"
 export default function Button({ label, onClick }: { label: string; onClick: () => void }) {
   
     return (
-      <ButtonStyled onClick={onClick}>
+      <ButtonStyled onClick={onClick} type="button" title="click">
         {label}
       </ButtonStyled>
     )
@@ -13,8 +13,8 @@ const ButtonStyled = styled.button`
     height: 12vh;
     width: 24svw;
     background-color: var(--bg-black);
-    color: #c0c0c0;
-    font-size: 2rem;
+    color: #FFF;
+    font-size: 2.4em;
     font-family: "Carme", sans-serif;
     font-style: normal;
     border: none;
