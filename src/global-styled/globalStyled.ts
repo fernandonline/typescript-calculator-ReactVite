@@ -25,7 +25,7 @@ export default createGlobalStyle`
     font-family: var(--fonte-padrao);
     font-weight: 400;
     font-style: normal;
-    padding-left: 1.5svw;
-    padding-right: 1.5svw;
+    padding-left: 2svw;
+    padding-right: 2svw;
     }
 `

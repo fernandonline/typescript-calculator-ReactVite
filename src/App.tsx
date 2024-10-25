@@ -114,7 +114,7 @@ export default function App() {
 const ButtonScreen = styled.div`
   background-color: var(--bg-black);
   border-radius: 16px;
-  min-height: 55svh;
+  min-height: 48svh;
   display: flex;
   flex-direction: column;
   gap: 1vh;
