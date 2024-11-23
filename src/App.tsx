@@ -8,14 +8,7 @@ import { evaluate } from "mathjs";
 
 export default function App() {
 
-  const [expression, setExpression] = useState<string[]>([])
-
-  const formatBr = (num: number) => {
-  return num.toLocaleString('pt-BR', {
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2
-  })
-}
+const [expression, setExpression] = useState<string[]>([])
 
 const addValue = (number: string) => {
   setExpression(prev => {
@@ -69,7 +62,7 @@ const calculate = () => {
     const expressionString = expression.join('').replace(/x/g, '*').replace(/,/g, '.')
     const result = evaluate(expressionString)
 
-    setExpression([formatBr(result)])
+    setExpression([(result)])
 }
 
   return (

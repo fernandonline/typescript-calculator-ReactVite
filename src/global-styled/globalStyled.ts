@@ -26,7 +26,5 @@ export default createGlobalStyle`
         font-family: var(--fonte-padrao);
         font-weight: 400;
         font-style: normal;
-
-        border: 1px solid white;
     }
 `
