@@ -17,7 +17,7 @@ export default function Header () {
 }
 
 const Cabecalho = styled.header`
-    height: 10svh;
+    height: 15svh;
     display: flex;
     justify-content: space-between;
     align-items: center;

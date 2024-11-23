@@ -81,7 +81,7 @@ const calculate = () => {
           <Button label='7' onClick={() => addValue('7')}/>
           <Button label='8' onClick={() => addValue('8')}/>
           <Button label='9' onClick={() => addValue('9')}/>
-          <Button label='X' onClick={() => handleOperator('x')}/>
+          <Button label='x' onClick={() => handleOperator('x')}/>
         </Row>
 
         <Row>

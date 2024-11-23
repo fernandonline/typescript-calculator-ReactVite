@@ -14,7 +14,7 @@ const InputContainer = styled.div`
     display: flex;
     background: var(--screen-background);
     font-family: var(--fonte-padrao);
-    margin-bottom: 5px;
+    margin-bottom: 30px;
 
     input {
         width: 100%;
