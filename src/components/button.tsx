@@ -10,11 +10,11 @@ export default function Button({ label, onClick }: { label: string; onClick: () 
 }
 
 const ButtonStyled = styled.button`
-    height: 11vh;
+    height: 9vh;
     width: 20svw;
     background-color: var(--bg-black);
     color: #FFF;
-    font-size: 2.4em;
+    font-size: 2.5em;
     font-family: "Carme", sans-serif;
     font-style: normal;
     border: none;

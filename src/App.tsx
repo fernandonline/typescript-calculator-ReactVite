@@ -4,23 +4,48 @@ import Input from "./components/input";
 import Button from "./components/button";
 import { useState } from "react";
 import { evaluate } from "mathjs";
-import Footer from "./components/footer";
-
 export default function App() {
 
   const [expression, setExpression] = useState<string[]>([])
 
-  const addValue = (number: string) => {
-    setExpression(prev => {
-      if (prev.length === 0 || isOperator(prev[prev.length - 1])) {
-        return [...prev, number]
+  const formatBr = (num: number) => {
+  return num.toLocaleString('pt-BR', {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
+  })
+}
+
+const addValue = (number: string) => {
+  setExpression(prev => {
+    if (prev.length === 0 || isOperator(prev[prev.length - 1])) {
+      // Se for o primeiro número ou após um operador, já formata
+      const formattedNum = number === ',' ? '0,' : number
+      return [...prev, formattedNum]
+    } else {
+      const newPrev = [...prev]
+      const lastNum = newPrev[newPrev.length - 1]
+      
+      // Remove pontos existentes para não interferir na formatação
+      const cleanNum = lastNum.replace(/\./g, '')
+      
+      // Se já tem vírgula, apenas adiciona o número
+      if (cleanNum.includes(',')) {
+        newPrev[newPrev.length - 1] = lastNum + number
       } else {
-        const newPrev = [...prev]
-        newPrev[newPrev.length - 1] += number
-        return newPrev
+        // Se não tem vírgula, formata o número
+        const newNum = cleanNum + number
+        if (newNum.length > 3) {
+          // Formata apenas se tiver mais de 3 dígitos
+          const numForFormat = Number(newNum.replace(/,/g, '.'))
+          newPrev[newPrev.length - 1] = numForFormat.toLocaleString('pt-BR')
+        } else {
+          newPrev[newPrev.length - 1] = newNum
+        }
       }
-    })
-  }
+      return newPrev
+    }
+  })
+}
   
   const handleOperator = (op: string) => {
     setExpression(prev => {
@@ -56,13 +81,10 @@ export default function App() {
   }
   
   const calculate = () => {
-
     if (expression.length === 0) return
-
       const expressionString = expression.join('').replace(/x/g, '*').replace(/,/g, '.')
       const result = evaluate(expressionString)
-
-      setExpression([result.toString()])
+      setExpression([formatBr(result)])
   }
 
   return (
@@ -106,15 +128,12 @@ export default function App() {
         </Row>
 
       </ButtonScreen>
-      <Footer/>
     </>
   )
 }
 
 const ButtonScreen = styled.div`
   background-color: var(--bg-black);
-  border-radius: 16px;
-  min-height: 48svh;
   display: flex;
   flex-direction: column;
   gap: 1vh;

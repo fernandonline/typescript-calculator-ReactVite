@@ -10,11 +10,10 @@ export default function Input ({value}: { value: string }) {
 
 const InputContainer = styled.div`
     width: 100%;
-    height: 16svh;
-    background: var(--screen-background);
+    height: 20svh;
     display: flex;
+    background: var(--screen-background);
     font-family: var(--fonte-padrao);
-    border-radius: 16px;
     margin-bottom: 5px;
 
     input {

@@ -17,15 +17,16 @@ export default createGlobalStyle`
     }
 
     body {
-    background-color: var(--bg-black);
-    height: 100svh;
-    color: var(--white-text);
-    display: flex;
-    flex-direction: column;
-    font-family: var(--fonte-padrao);
-    font-weight: 400;
-    font-style: normal;
-    padding-left: 2svw;
-    padding-right: 2svw;
+        background-color: var(--bg-black);
+        height: 100svh;
+        color: var(--white-text);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        font-family: var(--fonte-padrao);
+        font-weight: 400;
+        font-style: normal;
+
+        border: 1px solid white;
     }
 `
