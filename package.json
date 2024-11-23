@@ -1,5 +1,4 @@
 {
-  "homepage": "https://fernandonline.github.io/typescript-typescipt-vite",
   "name": "calculadora-typescipt-pessoal",
   "private": true,
   "version": "0.0.0",
@@ -8,9 +7,7 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
+    "preview": "vite preview"
   },
   "dependencies": {
     "mathjs": "^13.2.0",
