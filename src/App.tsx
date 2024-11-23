@@ -4,6 +4,8 @@ import Input from "./components/input";
 import Button from "./components/button";
 import { useState } from "react";
 import { evaluate } from "mathjs";
+
+
 export default function App() {
 
   const [expression, setExpression] = useState<string[]>([])
@@ -18,74 +20,57 @@ export default function App() {
 const addValue = (number: string) => {
   setExpression(prev => {
     if (prev.length === 0 || isOperator(prev[prev.length - 1])) {
-      // Se for o primeiro número ou após um operador, já formata
-      const formattedNum = number === ',' ? '0,' : number
-      return [...prev, formattedNum]
+      return [...prev, number]
     } else {
       const newPrev = [...prev]
-      const lastNum = newPrev[newPrev.length - 1]
-      
-      // Remove pontos existentes para não interferir na formatação
-      const cleanNum = lastNum.replace(/\./g, '')
-      
-      // Se já tem vírgula, apenas adiciona o número
-      if (cleanNum.includes(',')) {
-        newPrev[newPrev.length - 1] = lastNum + number
-      } else {
-        // Se não tem vírgula, formata o número
-        const newNum = cleanNum + number
-        if (newNum.length > 3) {
-          // Formata apenas se tiver mais de 3 dígitos
-          const numForFormat = Number(newNum.replace(/,/g, '.'))
-          newPrev[newPrev.length - 1] = numForFormat.toLocaleString('pt-BR')
-        } else {
-          newPrev[newPrev.length - 1] = newNum
-        }
-      }
+      newPrev[newPrev.length - 1] += number
       return newPrev
     }
   })
 }
-  
-  const handleOperator = (op: string) => {
-    setExpression(prev => {
-      if (prev.length === 0) return prev
-      if (isOperator(prev[prev.length - 1])) {
-        const newPrev = [...prev]
-        newPrev[newPrev.length - 1] = op
-        return newPrev
-      }
-      return [...prev, op]
-    })
-  }
-  
-  const isOperator = (char: string) => ['+', '-', 'x', '/'].includes(char)
-  
-  const delValue = () => {
-    setExpression(prev => {
+
+const handleOperator = (op: string) => {
+  setExpression(prev => {
+    if (prev.length === 0) return prev
+    if (isOperator(prev[prev.length - 1])) {
       const newPrev = [...prev]
-      if (newPrev.length > 0) {
-        const lastItem = newPrev[newPrev.length - 1]
-        if (lastItem.length > 1) {
-          newPrev[newPrev.length - 1] = lastItem.slice(0, -1)
-        } else {
-          newPrev.pop()
-        }
-      }
+      newPrev[newPrev.length - 1] = op
       return newPrev
-    })
-  }
-  
-  const resetValue = () => {
-    setExpression([])
-  }
-  
-  const calculate = () => {
-    if (expression.length === 0) return
-      const expressionString = expression.join('').replace(/x/g, '*').replace(/,/g, '.')
-      const result = evaluate(expressionString)
-      setExpression([formatBr(result)])
-  }
+    }
+    return [...prev, op]
+  })
+}
+
+const isOperator = (char: string) => ['+', '-', 'x', '/'].includes(char)
+
+const delValue = () => {
+  setExpression(prev => {
+    const newPrev = [...prev]
+    if (newPrev.length > 0) {
+      const lastItem = newPrev[newPrev.length - 1]
+      if (lastItem.length > 1) {
+        newPrev[newPrev.length - 1] = lastItem.slice(0, -1)
+      } else {
+        newPrev.pop()
+      }
+    }
+    return newPrev
+  })
+}
+
+const resetValue = () => {
+  setExpression([])
+}
+
+const calculate = () => {
+
+  if (expression.length === 0) return
+
+    const expressionString = expression.join('').replace(/x/g, '*').replace(/,/g, '.')
+    const result = evaluate(expressionString)
+
+    setExpression([formatBr(result)])
+}
 
   return (
     <>

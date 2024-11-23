@@ -10,7 +10,7 @@ export default function Input ({value}: { value: string }) {
 
 const InputContainer = styled.div`
     width: 100%;
-    height: 20svh;
+    height: 15svh;
     display: flex;
     background: var(--screen-background);
     font-family: var(--fonte-padrao);
@@ -22,7 +22,7 @@ const InputContainer = styled.div`
         padding: 0 2rem;
         background-color: var(--screen-backgrouond);
         border: 0;
-        font-size: 3rem;
+        font-size: 2.3rem;
         font-family: var(--fonte-padrao);
         color: var(--white-text);
         display: flex;
